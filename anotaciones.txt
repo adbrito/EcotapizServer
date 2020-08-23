@@ -1,0 +1,6 @@
+crear el ambiente virtual
+
+
+
+user: admin
+pass: admin123
