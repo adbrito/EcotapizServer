@@ -52,13 +52,20 @@ def getAuto(request):
 		ranking = body.get("ranking", None)
 		try:
 			nuevo_auto = Auto().actualizarAuto(id,nombre, descripcion, glb, imagen, ranking)
-			return JsonResponse({
-                'STATUS' : 'OK',
-                'CODIGO' : 200,
-                'DETALLE' :  'El objeto Auto actualizado tiene los siguientes atributos: ' + str(nuevo_auto.nombre)
-				+ '-' + str(nuevo_auto.descripcion) + '-' + str(nuevo_auto.glb) + '-' + str(nuevo_auto.imagen) + 
-				'-' + str(nuevo_auto.ranking)
-            })
+			if nuevo_auto:
+				return JsonResponse({
+                	'STATUS' : 'OK',
+                	'CODIGO' : 200,
+                	'DETALLE' :  'El objeto Auto actualizado tiene los siguientes atributos: ' + str(nuevo_auto.nombre)
+					+ '-' + str(nuevo_auto.descripcion) + '-' + str(nuevo_auto.glb) + '-' + str(nuevo_auto.imagen) + 
+					'-' + str(nuevo_auto.ranking)
+            	})
+			else:
+				return JsonResponse({
+                	'STATUS' : 'Error',
+                	'CODIGO' : 404,
+                	'DETALLE' :  'Auto con id ' + str(id) + ' no se encuentra en la base de datos'
+            	})
 		except Exception as e:
 			return JsonResponse({
                 'STATUS' : 'ERROR',
@@ -71,11 +78,18 @@ def getAuto(request):
 		id = body.get("id",None)
 		try:
 			mensaje = Auto().eliminarAuto(id)
-			return JsonResponse({
-                'STATUS' : 'OK',
-                'CODIGO' : 200,
-                'DETALLE' :  mensaje
-            })
+			if(mensaje != ""):
+				return JsonResponse({
+                	'STATUS' : 'OK',
+                	'CODIGO' : 200,
+                	'DETALLE' :  mensaje
+           		})
+			else:
+				return JsonResponse({
+                	'STATUS' : 'Error',
+                	'CODIGO' : 404,
+                	'DETALLE' :  'Auto con id ' + str(id) + ' no se encuentra en la base de datos'
+           		})
 		except Exception as e:
 			return JsonResponse({
                 'STATUS' : 'ERROR',

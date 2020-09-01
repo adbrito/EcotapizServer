@@ -21,19 +21,23 @@ class Auto(models.Model):
 
     def actualizarAuto(self,id,nombre, descripcion, glb, imagen, ranking):
         autos = Auto.objects.filter(id=id)
-        auto = autos[0]
-        auto.nombre = nombre
-        auto.descripcion = descripcion
-        auto.glb = glb
-        auto.imagen = imagen
-        auto.ranking = ranking
-        auto.save()
-        return auto
+        try:
+            auto = autos[0]
+            auto.nombre = nombre
+            auto.descripcion = descripcion
+            auto.glb = glb
+            auto.imagen = imagen
+            auto.ranking = ranking
+            auto.save()
+            return auto
+        except Exception as e:
+            return None
 
     def eliminarAuto(self,id):
         autos = Auto.objects.filter(id=id)
-        auto = autos[0]
-        auto.delete()
-        auto.save()
-        return "Auto con id " + str(id) + " eliminado exitosamente de la base de datos"
-
+        try:
+            auto = autos[0]
+            auto.delete()
+            return "Auto con id " + str(id) + " eliminado exitosamente de la base de datos"
+        except Exception as e:
+            return ""
