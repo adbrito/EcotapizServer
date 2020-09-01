@@ -21,7 +21,6 @@ def getAuto(request):
 	elif (request.method == 'POST'):
 		body = utils.request_todict(request)
 		nombre = body.get("nombre", None)
-		#print("Nombre: "+str(nombre))
 		descripcion = body.get("descripcion", None)
 		glb = body.get("glb", None)
 		imagen = body.get("imagen", None)
@@ -31,15 +30,13 @@ def getAuto(request):
 			return JsonResponse({
                 'STATUS' : 'OK',
                 'CODIGO' : 200,
-                'DETALLE' :  'El objeto Auto creado tiene los siguientes atributos: ' + str(nuevo_auto.nombre)
-				+ '-' + str(nuevo_auto.descripcion) + '-' + str(nuevo_auto.glb) + '-' + str(nuevo_auto.imagen) + 
-				'-' + str(nuevo_auto.ranking)
+                'DETALLE' :  utils.response_message("Auto","creado",nuevo_auto)
             })
 		except Exception as e:
 			return JsonResponse({
                 'STATUS' : 'ERROR',
                 'CODIGO' : 400,
-                'DETALLE' : 'Error creando auto' + str(e)
+                'DETALLE' : utils.error_message_2(request.method,"auto",e)
             })
 
 	elif (request.method == 'PUT'):
@@ -56,21 +53,19 @@ def getAuto(request):
 				return JsonResponse({
                 	'STATUS' : 'OK',
                 	'CODIGO' : 200,
-                	'DETALLE' :  'El objeto Auto actualizado tiene los siguientes atributos: ' + str(nuevo_auto.nombre)
-					+ '-' + str(nuevo_auto.descripcion) + '-' + str(nuevo_auto.glb) + '-' + str(nuevo_auto.imagen) + 
-					'-' + str(nuevo_auto.ranking)
+                	'DETALLE' :  utils.response_message("Auto","actualizado",nuevo_auto)
             	})
 			else:
 				return JsonResponse({
                 	'STATUS' : 'Error',
                 	'CODIGO' : 404,
-                	'DETALLE' :  'Auto con id ' + str(id) + ' no se encuentra en la base de datos'
+                	'DETALLE' :  utils.error_message_1("Auto",id)
             	})
 		except Exception as e:
 			return JsonResponse({
                 'STATUS' : 'ERROR',
                 'CODIGO' : 400,
-                'DETALLE' : 'Error actualizando auto' + str(e)
+                'DETALLE' : utils.error_message_2(request.method, "auto",e)
             })
 	
 	elif(request.method == 'DELETE'):
@@ -88,13 +83,13 @@ def getAuto(request):
 				return JsonResponse({
                 	'STATUS' : 'Error',
                 	'CODIGO' : 404,
-                	'DETALLE' :  'Auto con id ' + str(id) + ' no se encuentra en la base de datos'
+                	'DETALLE' : utils.error_message_1("Auto",id)
            		})
 		except Exception as e:
 			return JsonResponse({
                 'STATUS' : 'ERROR',
                 'CODIGO' : 400,
-                'DETALLE' : 'Error actualizando auto' + str(e)
+                'DETALLE' : utils.error_message_2(request.method, "auto",e)
             })
 
 	else:

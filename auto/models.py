@@ -1,4 +1,5 @@
 from django.db import models
+from auto import utils
 
 # Create your models here.
 class Auto(models.Model):
@@ -8,6 +9,9 @@ class Auto(models.Model):
     glb         = models.CharField(max_length=500)
     imagen      = models.CharField(max_length=500)
     ranking     = models.PositiveIntegerField()
+
+    def _str_(self):
+        return self.nombre + '-' + self.descripcion + '-' + self.glb + '-' + self.imagen + '-' + self.ranking
 
     def crearAuto(self,nombre, descripcion, glb, imagen, ranking):
         auto = Auto()
@@ -38,6 +42,6 @@ class Auto(models.Model):
         try:
             auto = autos[0]
             auto.delete()
-            return "Auto con id " + str(id) + " eliminado exitosamente de la base de datos"
+            return utils.message_1("Auto",id)
         except Exception as e:
             return ""
