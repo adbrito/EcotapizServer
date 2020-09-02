@@ -28,7 +28,7 @@ def getUsuario(request):
 			return JsonResponse({
                 'STATUS' : 'OK',
                 'CODIGO' : 200,
-                'DETALLE' :  utils.response_message("Usuario","creado",usuario)
+                'DETALLE' :  utils.response_message("Usuario","creado",usuario.to_string())
             })
 		except Exception as e:
 			return JsonResponse({
@@ -50,7 +50,7 @@ def getUsuario(request):
 				return JsonResponse({
                 	'STATUS' : 'OK',
                 	'CODIGO' : 200,
-                	'DETALLE' :  utils.response_message("Usuario","actualizado",usuario)
+                	'DETALLE' :  utils.response_message("Usuario","actualizado",usuario.to_string())
             	})
 			else:
 				return JsonResponse({

@@ -11,8 +11,8 @@ class Diseno(models.Model):
     ranking       = models.PositiveIntegerField()
     glb           = models.CharField(max_length=500)
 
-    def _str_(self):
-        return self.nombre + '-' + self.descripcion + '-' + self.imagen + '-' + self.metros + '-' + self.ranking + '-' + self.glb 
+    def to_string(self):
+        return str(self.nombre) + '-' + str(self.descripcion) + '-' + str(self.imagen) + '-' + str(self.metros) + '-' + str(self.ranking) + '-' + str(self.glb) 
 
     def crearDiseno(self,nombre, descripcion, imagen, metros, ranking, glb):
         diseno = Diseno()

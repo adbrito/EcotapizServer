@@ -30,7 +30,7 @@ def getAuto(request):
 			return JsonResponse({
                 'STATUS' : 'OK',
                 'CODIGO' : 200,
-                'DETALLE' :  utils.response_message("Auto","creado",nuevo_auto)
+                'DETALLE' :  utils.response_message("Auto","creado",nuevo_auto.to_string())
             })
 		except Exception as e:
 			return JsonResponse({
@@ -53,7 +53,7 @@ def getAuto(request):
 				return JsonResponse({
                 	'STATUS' : 'OK',
                 	'CODIGO' : 200,
-                	'DETALLE' :  utils.response_message("Auto","actualizado",nuevo_auto)
+                	'DETALLE' :  utils.response_message("Auto","actualizado",nuevo_auto.to_string())
             	})
 			else:
 				return JsonResponse({

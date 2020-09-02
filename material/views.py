@@ -30,7 +30,7 @@ def getMaterial(request):
 			return JsonResponse({
                 'STATUS' : 'OK',
                 'CODIGO' : 200,
-                'DETALLE' :  utils.response_message("Material","creado",material)
+                'DETALLE' :  utils.response_message("Material","creado",material.to_string())
             })
 		except Exception as e:
 			return JsonResponse({
@@ -53,7 +53,7 @@ def getMaterial(request):
 				return JsonResponse({
                 	'STATUS' : 'OK',
                 	'CODIGO' : 200,
-                	'DETALLE' :  utils.response_message("Material","actualizado",material)
+                	'DETALLE' :  utils.response_message("Material","actualizado",material.to_string())
             	})
 			else:
 				return JsonResponse({

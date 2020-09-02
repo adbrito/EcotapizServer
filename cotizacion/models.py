@@ -8,8 +8,8 @@ class Cotizacion(models.Model):
     total     = models.DecimalField(max_digits=10, decimal_places=2)
     iva       = models.DecimalField(max_digits=10, decimal_places=2)
 
-    def _str_(self):
-        return self.subtotal + '-' + self.total + '-' + self.iva
+    def to_string(self):
+        return str(self.subtotal) + '-' + str(self.total) + '-' + str(self.iva)
 
     def crearCotizacion(self,subtotal,total,iva):
         cotizacion = Cotizacion()
@@ -36,6 +36,6 @@ class Cotizacion(models.Model):
         try:
             cotizacion = cotizaciones[0]
             cotizacion.delete()
-            return utils.error_message_1("Cotizacion",id)
+            return utils.message_1("Cotizacion",id)
         except Exception as e:
             return ""

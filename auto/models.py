@@ -10,8 +10,8 @@ class Auto(models.Model):
     imagen      = models.CharField(max_length=500)
     ranking     = models.PositiveIntegerField()
 
-    def _str_(self):
-        return self.nombre + '-' + self.descripcion + '-' + self.glb + '-' + self.imagen + '-' + self.ranking
+    def to_string(self):
+        return str(self.nombre) + '-' + str(self.descripcion) + '-' + str(self.glb) + '-' + str(self.imagen) + '-' + str(self.ranking)
 
     def crearAuto(self,nombre, descripcion, glb, imagen, ranking):
         auto = Auto()

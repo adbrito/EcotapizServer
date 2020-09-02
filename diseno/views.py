@@ -31,7 +31,7 @@ def getDiseno(request):
 			return JsonResponse({
                 'STATUS' : 'OK',
                 'CODIGO' : 200,
-                'DETALLE' :  utils.response_message("Diseno","creado",diseno)
+                'DETALLE' :  utils.response_message("Diseno","creado",diseno.to_string())
             })
 		except Exception as e:
 			return JsonResponse({
@@ -55,7 +55,7 @@ def getDiseno(request):
 				return JsonResponse({
                 	'STATUS' : 'OK',
                 	'CODIGO' : 200,
-                	'DETALLE' :  utils.response_message("Diseno","actualizado",diseno)
+                	'DETALLE' :  utils.response_message("Diseno","actualizado",diseno.to_string())
             	})
 			else:
 				return JsonResponse({

@@ -9,8 +9,8 @@ class Material(models.Model):
     ranking     = models.PositiveIntegerField()
     precio      = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
 
-    def _str_(self):
-        return self.nombre + '-' + self.descripcion + '-' + self.imagen + '-' + self.ranking + '-' + self.precio
+    def to_string(self):
+        return str(self.nombre) + '-' + str(self.descripcion) + '-' + str(self.imagen) + '-' + str(self.ranking) + '-' + str(self.precio)
 
     def crearMaterial(self,nombre, descripcion, imagen, ranking, precio):
         material = Material()

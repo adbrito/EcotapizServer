@@ -9,8 +9,8 @@ class Usuario(models.Model):
     correo      = models.CharField(max_length=30)
     contrasena  = models.CharField(max_length=500)
 
-    def _str_(self):
-        return self.nombre + '-' + self.apellido + '-' + self.correo + '-' + self.contrasena
+    def to_string(self):
+        return str(self.nombre) + '-' + str(self.apellido) + '-' + str(self.correo) + '-' + str(self.contrasena)
 
     def crearUsuario(self,nombre, apellido, correo, contrasena):
         usuario = Usuario()
