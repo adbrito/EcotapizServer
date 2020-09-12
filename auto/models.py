@@ -7,3 +7,10 @@ class Auto(models.Model):
     glb         = models.CharField(max_length=500)
     imagen      = models.CharField(max_length=500)
     ranking     = models.PositiveIntegerField()
+
+
+
+
+
+
+    
