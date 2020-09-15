@@ -11,6 +11,7 @@ from auto import utils
 
 # Create your views here.
 def getSimulacion(request):
+	#Prueba
 	if request.method == 'GET':
 		res = []
 		simulacion= Simulacion.objects.all()
