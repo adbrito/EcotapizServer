@@ -1,5 +1,5 @@
-crear el ambiente virtual
-
+levantar el ambiente virtual
+myvenv\Scripts\activate
 
 
 user: admin
