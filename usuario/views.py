@@ -92,7 +92,7 @@ def getUsuario(request):
 	else:
 		return HttpResponse(status=404)
 
-def getOneUsuario(request,pk):
+def getOneUsuario2(request,pk):
 	if request.method == 'GET':
 		diccionario = {}
 		usuario = Usuario.objects.get(pk=pk)
