@@ -95,15 +95,6 @@ def getSimulaciones(request, id):
 
 
 def getSimulacion(request):
-<<<<<<< HEAD
-	#Prueba
-	if request.method == 'GET':
-		res = []
-		simulacion= Simulacion.objects.all()
-		for simu in simulacion:
-			#if simu:
-				print(simu.idAuto.id)
-=======
     body = utils.request_todict(request)
     idUsuario = body.get("idUsuario", None)
 
@@ -123,7 +114,6 @@ def getSimulacion(request):
         return JsonResponse(res,safe=False)
 
 
->>>>>>> Get filtrado simulaciones para usuario
 
     elif (request.method == 'POST'):
         body = utils.request_todict(request)
