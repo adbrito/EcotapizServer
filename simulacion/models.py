@@ -49,10 +49,9 @@ class Simulacion(models.Model):
         simulaciones = Simulacion.objects.filter(id=id)
         try:
             simulacion = simulaciones[0]
-            cotizaciones = Cotizacion.objects.filter(id=simulacion.idCotizacion)
-            for c in cotizaciones:
-                c.delete()
+            cotizaciones = Cotizacion.eliminarCotizacion(id=simulacion.idCotizacion.id)
             simulacion.delete()
             return utils.message_1("Simulacion",id)
         except Exception as e:
-            return ""
+            print ("error: ",e)
+            return e

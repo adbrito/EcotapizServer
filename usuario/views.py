@@ -5,18 +5,19 @@ from .models import *
 from auto import utils
 
 # Create your views here.
-def getUsuario(request):
+def getUsuario(request, id):
+
 	if request.method == 'GET':
 		res = []
 		usuario= Usuario.objects.filter()
 		for usua in usuario:
-			#print(usua)
-
 			diccionario={"id":usua.id,"nombre":usua.nombre,"apellido":usua.apellido,
             "correo":usua.correo,"contrasena":usua.contrasena}
+			if  id==usua.id :
+				return JsonResponse(diccionario,safe=False)
 			res.append(diccionario)
-
 		return JsonResponse(res,safe=False)
+		
 	elif (request.method == 'POST'):
 		body = utils.request_todict(request)
 		nombre = body.get("nombre", None)

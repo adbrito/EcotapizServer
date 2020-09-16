@@ -11,25 +11,52 @@ from auto import utils
 
 
 def getSimulaciones(request, id):
-	#print(id)
-	res = []
-	simulacion = Simulacion.objects.all()
-	for simu in simulacion:
-        #if simu:
-        #print(simu.idAuto.id)
-		if(id == simu.idUsuario.id):
-			diccionario = {
-				"id": simu.id,
-				"idAuto": simu.idAuto.id,
-				"idDiseno": simu.idDiseno.id,
-				"idCotizacion": simu.idCotizacion.id,
-				"idUsuario": simu.idUsuario.id,
-				"fecha": simu.fecha,
-				"idMaterial": simu.idMaterial.id
-			}
-			res.append(diccionario)
+    if request.method == 'GET':
+        #print(id)
+        res = []
+        simulacion = Simulacion.objects.all()
+        for simu in simulacion:
+            #if simu:
+            #print(simu.idAuto.id)
+            if(id == simu.idUsuario.id):
+                diccionario = {
+                    "id": simu.id,
+                    "idAuto": simu.idAuto.id,
+                    "idDiseno": simu.idDiseno.id,
+                    "idCotizacion": simu.idCotizacion.id,
+                    "idUsuario": simu.idUsuario.id,
+                    "fecha": simu.fecha,
+                    "idMaterial": simu.idMaterial.id
+                }
+                res.append(diccionario)
 
-	return JsonResponse(res,safe=False)
+        return JsonResponse(res,safe=False)
+
+    elif(request.method == 'DELETE'):
+
+        try:
+            mensaje = Simulacion().eliminarSimulacion(id)
+            if(mensaje != ""):
+                return JsonResponse({
+                             'STATUS' : 'OK',
+                             'CODIGO' : 200,
+                             'DETALLE' :  mensaje
+                         })
+            else:
+                return JsonResponse({
+                             'STATUS' : 'Error',
+                             'CODIGO' : 404,
+                             'DETALLE' : utils.error_message_1("Simulacion",id)
+                         })
+        except Exception as e:
+            return JsonResponse({
+                         'STATUS' : 'ERROR',
+                         'CODIGO' : 400,
+                         'DETALLE' : utils.error_message_2(request.method, "simulacion",e)
+                     })
+    else:
+        return HttpResponse(status=404)
+    
 
 
 
@@ -149,29 +176,8 @@ def getSimulacion(request):
                          'CODIGO' : 400,
                          'DETALLE' : utils.error_message_2(request.method, "simulacion",e)
                      })
-
-    elif(request.method == 'DELETE'):
-        body = utils.request_todict(request)
-        id = body.get("id",None)
-        try:
-            mensaje = Simulacion().eliminarSimulacion(id)
-            if(mensaje != ""):
-                return JsonResponse({
-                             'STATUS' : 'OK',
-                             'CODIGO' : 200,
-                             'DETALLE' :  mensaje
-                         })
-            else:
-                return JsonResponse({
-                             'STATUS' : 'Error',
-                             'CODIGO' : 404,
-                             'DETALLE' : utils.error_message_1("Simulacion",id)
-                         })
-        except Exception as e:
-            return JsonResponse({
-                         'STATUS' : 'ERROR',
-                         'CODIGO' : 400,
-                         'DETALLE' : utils.error_message_2(request.method, "simulacion",e)
-                     })
     else:
         return HttpResponse(status=404)
+    
+
+    

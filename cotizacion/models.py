@@ -31,7 +31,7 @@ class Cotizacion(models.Model):
         except Exception as e:
             return None
 
-    def eliminarCotizacion(self,id):
+    def eliminarCotizacion(id):
         cotizaciones = Cotizacion.objects.filter(id=id)
         try:
             cotizacion = cotizaciones[0]
