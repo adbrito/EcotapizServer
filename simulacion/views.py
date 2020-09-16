@@ -9,8 +9,43 @@ import requests
 from .models import *
 from auto import utils
 
+
 # Create your views here.
+def getSimulaciones(request, id):
+	#print(id)
+	res = []
+	simulacion = Simulacion.objects.all()
+
+	#Cada simu es un Auto Object (instancia del diccionario simulacion)
+	for simu in simulacion:
+        #if simu:
+        #print(simu.idAuto.id)
+		if(id == simu.idUsuario.id):
+			#Obtenemos las descripciones de cada campo
+			#print(simu.idAuto.descripcion)
+
+			#autosDB = Auto.objects.filter(id = simu["idAuto"])
+			#print(autosDB[0].descripcion)
+			
+			diccionario = {
+				"id": simu.id,
+				"Auto": simu.idAuto.descripcion,
+				"Diseno": simu.idDiseno.descripcion,
+				"Cotizacion": simu.idCotizacion.total,
+				"Usuario": simu.idUsuario.nombre,
+				"fecha": simu.fecha,
+				"Material": simu.idMaterial.descripcion
+			}
+			res.append(diccionario)
+
+	return JsonResponse(res,safe=False)
+
+
+
+
+
 def getSimulacion(request):
+	#Prueba
 	if request.method == 'GET':
 		res = []
 		simulacion= Simulacion.objects.all()
