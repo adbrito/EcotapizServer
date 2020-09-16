@@ -91,3 +91,15 @@ def getUsuario(request):
 
 	else:
 		return HttpResponse(status=404)
+
+def getOneUsuario(request,pk):
+	if request.method == 'GET':
+		diccionario = {}
+		usuario = Usuario.objects.get(pk=pk)
+		if usuario:
+			diccionario = {"autor" : usuario.nombre + " " + usuario.apellido}
+		return JsonResponse(diccionario,safe=False)
+	else:
+		return HttpResponse(status=404)
+
+
