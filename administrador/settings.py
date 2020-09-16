@@ -25,7 +25,15 @@ SECRET_KEY = '(dsrh!l5^=c)gj!4a$rhgd1+x*faftdgtk@ks)_kcimev5@973'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['*',]
+
+#CORS_ORIGIN_ALLOW_ALL=True
+
+
 ALLOWED_HOSTS = ['localhost','127.0.0.1']
+
 
 
 # Application definition
@@ -36,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
     'django.contrib.staticfiles',
+#    'corsheaders',
 
     #Comonentes instalados aparte
     'rest_framework',
@@ -48,6 +58,7 @@ INSTALLED_APPS = [
     'simulacion',
     'usuario',
 
+
 ]
 
 MIDDLEWARE = [
@@ -56,6 +67,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -89,10 +102,10 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_WHITELIST = [
     'localhost:3030',
-    'localhost:8000'
-)
+    'localhost:8000',
+]
 CORS_ORIGIN_REGEX_WHITELIST = (
     'localhost:3030',
     'localhost:8000'
@@ -169,3 +182,36 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:4200',
+# )
+# CORS_ORIGIN_REGEX_WHITELIST = (
+#     'localhost:4200',
+# )
+
+# CORS_ALLOW_METHODS = (
+#     'GET',
+#     'OPTIONS',
+#     'PATCH',
+#     'POST',
+#     'PUT',
+# )
+
+# CORS_ALLOW_HEADERS = (
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'x-requested-with',
+# )
+
+
