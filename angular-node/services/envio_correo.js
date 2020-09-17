@@ -13,9 +13,10 @@ let transporter = nodeMailer.createTransport({
         // Step 2
         let mailOptions = {
             from: "ecotapiz@hotmail.com", // TODO: email sender
-           to: contacto.email, // TODO: email receiver
+           to: 'allibrito1@gmail.com', // TODO: email receiver
           subject: contacto.name +" le ha enviado un correo",
-            text: "Se está tratando de comunicar con usted "+contacto.name+" \n"+contacto.mensaje
+            text: "Se está tratando de comunicar con usted "+contacto.name+"\n\n\n Contenido del mensaje: "+contacto.mensaje+"\n\n"+
+            "Correo proporcionado: "+ contacto.email+ " \n\nCorreo enviado desde la página de Ecotapiz\n"
         };
         
         // Step 3
