@@ -112,70 +112,38 @@ def clienteCotizacion(request):
 
 
 
-def cotizacionesXMes(request):
+def NcotizacionesXMes(request):
 	if request.method=='GET':
 		res=[]
-		diccionario={}
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-01-')#.annotate(count = Count('fecha'))
-		diccionario["label"]="Enero"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		#print(str(len(simulacion))+" \n"+str(diccionario))
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-02-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Febrero"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-03-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Marzo"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-04-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Abril"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-05-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Mayo"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-06-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Junio"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-07-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Julio"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-08-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Agosto"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-09-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Septiembre"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-10-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Octubre"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-11-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Noviembre"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
-		simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-12-')#.annotate(count = Count('fecha'))
-		diccionario={}
-		diccionario["label"]="Diciembre"
-		diccionario["value"]=len(simulacion)
-		res.append(diccionario)
+		mesesN=["01","02","03","04","05","06","07","08","09","10","11","12"]
+
+		meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+		for mes in range(0,len(meses)):
+			diccionario={}
+			simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-'+mesesN[mes]+'-')#.annotate(count = Count('fecha'))
+			diccionario["label"]=meses[mes]
+			diccionario["value"]=len(simulacion)
+			res.append(diccionario)
 		print(res)
 		return JsonResponse(res,safe=False)
 	return HttpResponse(status=404)
+
+
+def totalCotizacionesMensuales(request):
+	if request.method=='GET':
+		res=[]
+		meses=["01","02","03","04","05","06","07","08","09","10","11","12"]
+		for mes in meses:
+			diccionario={}
+			simulacion=Simulacion.objects.filter(fecha__contains=str(date.today().year)+'-'+mes+'-')
+			contador=0
+			for s in simulacion:
+				contador=contador+float(s.idCotizacion.total)
+				#print(float(s.idCotizacion.total))
+			diccionario["Total"]=str(contador)
+			diccionario["Mes"]=int(mes)
+			res.append(diccionario)
+		#***************************************************************
+		#print(simulacion, contador)		
+		return JsonResponse(res,safe=False)
+	return HttpResponse(status=404)		
