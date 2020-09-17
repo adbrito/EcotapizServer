@@ -103,4 +103,16 @@ def getOneUsuario2(request,pk):
 	else:
 		return HttpResponse(status=404)
 
+def getAllUsers(request):
+	if request.method == 'GET':
+		res = []
+		usuario= Usuario.objects.filter()
+		for usua in usuario:
+			diccionario={"id":usua.id,"nombre":usua.nombre,"apellido":usua.apellido,
+            "correo":usua.correo,"contrasena":usua.contrasena}
+			res.append(diccionario)
+		return JsonResponse(res,safe=False)
+	else:
+		return HttpResponse(status=404)
+
 
