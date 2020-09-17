@@ -94,3 +94,13 @@ def getMaterial(request):
 
 	else:
 		return HttpResponse(status=404)
+
+def getOneMaterial(request,pk):
+	if request.method == 'GET':
+		diccionario = {}
+		material = Material.objects.get(pk=pk)
+		if material:
+			diccionario = {"material" : material.nombre}
+		return JsonResponse(diccionario,safe=False)
+	else:
+		return HttpResponse(status=404)
