@@ -5,5 +5,6 @@ from .views import *
 urlpatterns = [
 	path('cotizacion/', getCotizacion),
 	path('queryCotizacion/',clienteCotizacion),
-	path('cotizacionMensual/',cotizacionesXMes)
+	path('cotizacionMensual/',NcotizacionesXMes),
+	path('totalcotixmes/',totalCotizacionesMensuales),
 ]

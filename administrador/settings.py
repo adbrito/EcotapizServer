@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
 
     'django.contrib.staticfiles',
-#    'corsheaders',
+    #'corsheaders',
 
     #Comonentes instalados aparte
     'rest_framework',
@@ -117,6 +117,7 @@ CORS_ALLOW_METHODS = (
     'PATCH',
     'POST',
     'PUT',
+    'DELETE'
 )
 
 CORS_ALLOW_HEADERS = (
