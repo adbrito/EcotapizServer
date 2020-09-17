@@ -10,7 +10,7 @@ from .models import *
 from auto import utils
 
 
-def getSimulaciones(request, id):
+def getSimulacionesids(request, id):
     if request.method == 'GET':
         #print(id)
         res = []
@@ -35,6 +35,7 @@ def getSimulaciones(request, id):
     elif(request.method == 'DELETE'):
 
         try:
+            print("entra a eliminar :", id)
             mensaje = Simulacion().eliminarSimulacion(id)
             if(mensaje != ""):
                 return JsonResponse({
@@ -79,12 +80,16 @@ def getSimulaciones(request, id):
 			
 			diccionario = {
 				"id": simu.id,
-				"Auto": simu.idAuto.descripcion,
-				"Diseno": simu.idDiseno.descripcion,
+				"Auto": simu.idAuto.nombre,
+				"Diseno": simu.idDiseno.nombre,
 				"Cotizacion": simu.idCotizacion.total,
 				"Usuario": simu.idUsuario.nombre,
 				"fecha": simu.fecha,
-				"Material": simu.idMaterial.descripcion
+				"Material": simu.idMaterial.nombre,
+                "idAuto": simu.idAuto.id,
+                "idDiseno": simu.idDiseno.id,
+                "idCotizacion": simu.idCotizacion.id,
+                "idMaterial": simu.idMaterial.id
 			}
 			res.append(diccionario)
 

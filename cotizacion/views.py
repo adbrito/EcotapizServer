@@ -30,7 +30,7 @@ def getCotizacion(request):
 			return JsonResponse({
                 'STATUS' : 'OK',
                 'CODIGO' : 200,
-                'DETALLE' :  utils.response_message("Cotizacion", "creado",cotizacion.to_string())
+                'DETALLE' :  cotizacion.id
             })
 		except Exception as e:
 			return JsonResponse({
@@ -51,7 +51,7 @@ def getCotizacion(request):
 				return JsonResponse({
                 	'STATUS' : 'OK',
                 	'CODIGO' : 200,
-                	'DETALLE' : utils.response_message("Cotizacion", "actualizado",cotizacion.to_string())
+                	'DETALLE' :  cotizacion.id
             	})
 			else:
 				return JsonResponse({
